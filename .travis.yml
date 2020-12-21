@@ -30,3 +30,9 @@ script:
   # TODO deploy
   # TODO ppc7450
 
+branches:
+  only:
+    - master
+rvm:
+ - 2.4
+
