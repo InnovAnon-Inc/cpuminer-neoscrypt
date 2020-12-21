@@ -1,0 +1,32 @@
+language: c++
+
+#compiler:
+#  - gcc
+#  - clang
+
+services:
+  - docker
+
+script:
+  # TODO other coin
+  # test natively
+  - docker build                                   \
+            -t innovanon/cpuminer-neoscrypt:native \
+            --build-arg COIN=neoscrypt             \
+            --pull .
+  - docker run -d innovanon/cpuminer-neoscrypt:native
+  - sleep 19
+  - docker ps -a
+  - docker stop innovanon/cpuminer-neoscrypt:native
+  # deploy generic
+  - docker build                                    \
+            -t innovanon/cpuminer-neoscrypt:generic \
+            --build-arg COIN=neoscrypt              \
+            --pull .
+  - docker run -d innovanon/cpuminer-neoscrypt:generic
+  - sleep 19
+  - docker ps -a
+  - docker stop innovanon/cpuminer-neoscrypt:generic
+  # TODO deploy
+  # TODO ppc7450
+
